@@ -34,10 +34,26 @@ public class StudentServiceImplementation implements StudentService {
         return students;
     }
 
-
-
     @Override
     public Student getStudentById(Long studentId) {
         return studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student does not exist"));
+    }
+
+    @Override
+    public Student updateStudentById(Long studentId, StudentDTO studentDTO) {
+        Student student = getStudentById(studentId);
+        student.setFirstName(studentDTO.getFirstName());
+        student.setLastName(studentDTO.getLastName());
+
+        return studentRepository.save(student);
+    }
+
+    @Override
+    public void deleteStudentById(Long studentId) {
+        if (!studentRepository.existsById(studentId)) {
+            throw new IllegalStateException("Student does not exist");
+        }
+
+        studentRepository.deleteById(studentId);
     }
 }
