@@ -10,4 +10,6 @@ public interface StudentService {
     Student createStudent(StudentDTO studentDTO);
 
     List<Student> getAllStudents();
+
+    Student getStudentById(Long studentId);
 }

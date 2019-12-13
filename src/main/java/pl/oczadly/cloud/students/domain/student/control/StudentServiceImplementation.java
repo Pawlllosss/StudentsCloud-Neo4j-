@@ -33,4 +33,11 @@ public class StudentServiceImplementation implements StudentService {
 
         return students;
     }
+
+
+
+    @Override
+    public Student getStudentById(Long studentId) {
+        return studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student does not exist"));
+    }
 }

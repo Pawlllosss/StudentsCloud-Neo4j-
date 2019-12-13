@@ -1,13 +1,13 @@
 package pl.oczadly.cloud.students.domain.student.entity;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 public class StudentDTO {
 
-    @NotNull
+    @NotBlank
     private String firstName;
 
-    @NotNull
+    @NotBlank
     private String lastName;
 
     public String getFirstName() {
