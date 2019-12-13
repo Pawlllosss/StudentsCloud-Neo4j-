@@ -3,6 +3,8 @@ package pl.oczadly.cloud.students.domain.course.boundary;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,10 +56,29 @@ public class CourseRestController {
         return new Resources<>(studentsMapped, selfLink);
     }
 
-    @PutMapping("/{courseId}/student/{studentId}")
+    @PutMapping("/{courseId}")
+    public Resource<Course> updateCourse(@PathVariable Long courseId, @RequestBody CourseDTO courseDTO) {
+        Course modifiedCourse = courseService.updateCourseById(courseId, courseDTO);
+        return resourceAssembler.toResource(modifiedCourse);
+    }
+
+    @PutMapping("/{courseId}/add-student/{studentId}")
     public Resource<Course> addCourseAttendee(@PathVariable Long courseId, @PathVariable Long studentId) {
         Course modifiedCourse = courseService.addStudentToCourse(courseId, studentId);
         return resourceAssembler.toResource(modifiedCourse);
+    }
 
+    @PutMapping("/{courseId}/remove-student/{studentId}")
+    public Resource<Course> removeCourseAttendee(@PathVariable Long courseId, @PathVariable Long studentId) {
+        Course modifiedCourse = courseService.removeStudentFromCourse(courseId, studentId);
+        return resourceAssembler.toResource(modifiedCourse);
+    }
+
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<Course> deleteCourse(@PathVariable Long courseId) {
+        courseService.deleteCourseById(courseId);
+
+        return ResponseEntity.noContent()
+                .build();
     }
 }

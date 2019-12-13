@@ -15,13 +15,16 @@ import java.util.List;
 public class CourseServiceImplementation implements CourseService {
 
     private CourseRepository courseRepository;
+    private CourseAttendeeRepository courseAttendeeRepository;
 
     private StudentService studentService;
 
     private ModelMapper modelMapper;
 
-    public CourseServiceImplementation(CourseRepository courseRepository, StudentService studentService, ModelMapper modelMapper) {
+    public CourseServiceImplementation(CourseRepository courseRepository, CourseAttendeeRepository courseAttendeeRepository,
+                                       StudentService studentService, ModelMapper modelMapper) {
         this.courseRepository = courseRepository;
+        this.courseAttendeeRepository = courseAttendeeRepository;
         this.studentService = studentService;
         this.modelMapper = modelMapper;
     }
@@ -47,6 +50,15 @@ public class CourseServiceImplementation implements CourseService {
     }
 
     @Override
+    public Course updateCourseById(Long courseId, CourseDTO courseDTO) {
+        Course course = getCourseById(courseId);
+        course.setName(courseDTO.getName());
+        course.setDescription(courseDTO.getDescription());
+
+        return courseRepository.save(course);
+    }
+
+    @Override
     public Course addStudentToCourse(Long courseId, Long studentId) {
         Course course = getCourseById(courseId);
         Student student = studentService.getStudentById(studentId);
@@ -63,5 +75,34 @@ public class CourseServiceImplementation implements CourseService {
         courseAttendee.setStudent(student);
 
         return courseAttendee;
+    }
+
+    @Override
+    public Course removeStudentFromCourse(Long courseId, Long studentId) {
+        List<CourseAttendee> courseAttendees = new LinkedList<>();
+        courseAttendeeRepository.findAll()
+                .forEach(courseAttendees::add);
+        CourseAttendee courseAttendee = courseAttendees.stream()
+                .filter(attendee -> isCourseAttendingRelatedToCourseAndStudent(courseId, studentId, attendee))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No course assigned for this student"));
+
+        Course course = getCourseById(courseId);
+        course.removeCourseAttendee(courseAttendee);
+
+        return courseRepository.save(course);
+    }
+
+    private boolean isCourseAttendingRelatedToCourseAndStudent(Long courseId, Long studentId, CourseAttendee attendee) {
+        return attendee.getCourse().getId().equals(courseId) && attendee.getStudent().getId().equals(studentId);
+    }
+
+    @Override
+    public void deleteCourseById(Long courseId) {
+        if (!courseRepository.existsById(courseId)) {
+            throw new IllegalStateException("Course does not exist");
+        }
+
+        courseRepository.deleteById(courseId);
     }
 }

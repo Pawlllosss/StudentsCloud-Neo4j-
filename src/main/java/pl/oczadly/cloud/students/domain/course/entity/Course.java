@@ -5,9 +5,9 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.Relationship;
 
 import javax.validation.constraints.NotBlank;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Course {
 
@@ -22,10 +22,10 @@ public class Course {
     private String description;
 
     @Relationship(type = "ATTENDS", direction = Relationship.INCOMING)
-    private List<CourseAttendee> courseAttendees;
+    private Set<CourseAttendee> courseAttendees;
 
     public Course() {
-        courseAttendees = new LinkedList<>();
+        courseAttendees = new HashSet<>();
     }
 
     @Override
@@ -75,11 +75,11 @@ public class Course {
         this.description = description;
     }
 
-    public List<CourseAttendee> getCourseAttendees() {
+    public Set<CourseAttendee> getCourseAttendees() {
         return courseAttendees;
     }
 
-    public void setCourseAttendees(List<CourseAttendee> courseAttendees) {
+    public void setCourseAttendees(Set<CourseAttendee> courseAttendees) {
         this.courseAttendees = courseAttendees;
     }
 }

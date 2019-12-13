@@ -13,6 +13,11 @@ public interface CourseService {
 
     Course getCourseById(Long courseId);
 
+    Course updateCourseById(Long courseId, CourseDTO courseDTO);
+
     Course addStudentToCourse(Long courseId, Long studentId);
 
+    Course removeStudentFromCourse(Long courseId, Long studentId);
+
+    void deleteCourseById(Long courseId);
 }

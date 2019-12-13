@@ -8,6 +8,8 @@ import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 import pl.oczadly.cloud.students.domain.student.entity.Student;
 
+import java.util.Objects;
+
 @RelationshipEntity(type = "ATTENDS")
 public class CourseAttendee {
 
@@ -21,6 +23,21 @@ public class CourseAttendee {
     @EndNode
     @JsonIgnore
     private Course course;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CourseAttendee that = (CourseAttendee) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(student, that.student) &&
+                Objects.equals(course, that.course);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, student, course);
+    }
 
     public Long getId() {
         return id;

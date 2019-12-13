@@ -8,9 +8,9 @@ import org.neo4j.ogm.annotation.Relationship;
 import pl.oczadly.cloud.students.domain.course.entity.Course;
 
 import javax.validation.constraints.NotBlank;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @NodeEntity
 public class Student {
@@ -27,10 +27,10 @@ public class Student {
 
     @Relationship(type = "ATTENDS")
     @JsonIgnore
-    private List<Course> courses;
+    private Set<Course> courses;
 
     public Student() {
-        this.courses = new LinkedList<>();
+        this.courses = new HashSet<>();
     }
 
     @Override
@@ -72,11 +72,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
 }
