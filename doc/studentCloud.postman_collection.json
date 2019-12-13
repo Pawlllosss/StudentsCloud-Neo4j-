@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "44b344e6-e919-4003-9792-4d8651e03ba6",
+		"name": "studentCloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "CreateStudent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Stefan\",\n\t\"lastName\": \"Andrzejowski\"\n}"
+						},
+						"url": {
+							"raw": "{{environment}}/student",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStudent",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Andrzej\",\n\t\"lastName\": \"Nowak\"\n}"
+						},
+						"url": {
+							"raw": "{{environment}}/student/20",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"student",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteStudent",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/student/21",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"student",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllStudents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/student",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "course",
+			"item": [
+				{
+					"name": "getAllCourses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/course",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCourse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Programowanie niskopoziomowe\",\n\t\"description\": \"Nauka podstaw Assemblera\"\n}"
+						},
+						"url": {
+							"raw": "{{environment}}/course",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCourse",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Inżynieria oprogramowania\",\n\t\"description\": \"Scrum, Agile\"\n}"
+						},
+						"url": {
+							"raw": "{{environment}}/course/22",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddCourseAttendee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/course/25/add-student/23",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course",
+								"25",
+								"add-student",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveCourseAttendee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/course/25/remove-student/24",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course",
+								"25",
+								"remove-student",
+								"24"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCourse",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/course/22/",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course",
+								"22",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6780ff87-b98d-4977-8880-671b60355c94",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b92c7890-9915-444e-bae5-6f240b38e5c6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a051f0c4-622e-4b26-a47b-bce594fe4d5a",
+			"key": "environment",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
