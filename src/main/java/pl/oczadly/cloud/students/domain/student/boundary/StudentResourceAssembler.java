@@ -4,6 +4,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
+import pl.oczadly.cloud.students.domain.course.boundary.CourseRestController;
 import pl.oczadly.cloud.students.domain.student.entity.Student;
 import pl.oczadly.cloud.students.domain.student.entity.StudentDTO;
 
@@ -21,7 +22,9 @@ public class StudentResourceAssembler implements ResourceAssembler<Student, Reso
                 .withRel("update");
         Link deleteLink = linkTo(methodOn(StudentRestController.class).deleteStudent(studentId))
                 .withRel("delete");
+        Link assignedCoursesLink = linkTo(methodOn(CourseRestController.class).getCoursesAssignedToStudent(studentId))
+                .withRel("courses");
 
-        return new Resource<>(student, updateLink, deleteLink);
+        return new Resource<>(student, updateLink, deleteLink, assignedCoursesLink);
     }
 }
