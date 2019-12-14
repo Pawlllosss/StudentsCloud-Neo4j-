@@ -56,6 +56,13 @@ public class CourseRestController {
         return new Resources<>(studentsMapped, selfLink);
     }
 
+    @GetMapping("student/{studentId}")
+    public Resources<Resource<Course>> getCoursesAssignedToStudent(@PathVariable Long studentId) {
+        List<Course> courses = courseService.getCoursesAssignedToStudent(studentId);
+        return mapCoursesToResources(courses);
+    }
+
+
     @PutMapping("/{courseId}")
     public Resource<Course> updateCourse(@PathVariable Long courseId, @RequestBody CourseDTO courseDTO) {
         Course modifiedCourse = courseService.updateCourseById(courseId, courseDTO);

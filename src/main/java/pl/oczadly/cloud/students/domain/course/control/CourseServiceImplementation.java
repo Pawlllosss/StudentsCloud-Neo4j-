@@ -10,6 +10,7 @@ import pl.oczadly.cloud.students.domain.student.entity.Student;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImplementation implements CourseService {
@@ -47,6 +48,24 @@ public class CourseServiceImplementation implements CourseService {
     @Override
     public Course getCourseById(Long courseId) {
         return courseRepository.findById(courseId).orElseThrow(() -> new IllegalStateException("Course not found"));
+    }
+
+    @Override
+    public List<Course> getCoursesAssignedToStudent(Long studentId) {
+        List<CourseAttendee> courseAttendees = new LinkedList<>();
+        courseAttendeeRepository.findAll()
+                .forEach(courseAttendees::add);
+        List<CourseAttendee> courseAttendeesRelatedToStudent = courseAttendees.stream()
+                .filter(attendee -> isCourseAttendingRelatedToStudent(attendee, studentId))
+                .collect(Collectors.toList());
+
+        return courseAttendeesRelatedToStudent.stream()
+                    .map(CourseAttendee::getCourse)
+                    .collect(Collectors.toList());
+    }
+
+    private boolean isCourseAttendingRelatedToStudent(CourseAttendee attendee, Long studentId) {
+        return attendee.getStudent().getId().equals(studentId);
     }
 
     @Override

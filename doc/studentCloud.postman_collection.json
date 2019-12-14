@@ -142,6 +142,29 @@
 					"response": []
 				},
 				{
+					"name": "getCourseAssignedToStudent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/course/student/23",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"course",
+								"student",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "CreateCourse",
 					"request": {
 						"method": "POST",
@@ -155,7 +178,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Programowanie niskopoziomowe\",\n\t\"description\": \"Nauka podstaw Assemblera\"\n}"
+							"raw": "{\n\t\"name\": \"Inżynieria oprogramowania\",\n\t\"description\": \"Procesy tworzenia software'u\"\n}"
 						},
 						"url": {
 							"raw": "{{environment}}/course",
@@ -215,15 +238,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{environment}}/course/25/add-student/23",
+							"raw": "{{environment}}/course/0/add-student/22",
 							"host": [
 								"{{environment}}"
 							],
 							"path": [
 								"course",
-								"25",
+								"0",
 								"add-student",
-								"23"
+								"22"
 							]
 						}
 					},
@@ -317,9 +340,9 @@
 	],
 	"variable": [
 		{
-			"id": "a051f0c4-622e-4b26-a47b-bce594fe4d5a",
+			"id": "c24436d5-2dc0-43fa-97eb-ea3c7d172fff",
 			"key": "environment",
-			"value": "",
+			"value": " http://localhost:8080 ",
 			"type": "string"
 		}
 	]

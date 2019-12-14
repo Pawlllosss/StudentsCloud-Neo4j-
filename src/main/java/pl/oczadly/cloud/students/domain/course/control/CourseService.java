@@ -13,6 +13,8 @@ public interface CourseService {
 
     Course getCourseById(Long courseId);
 
+    List<Course> getCoursesAssignedToStudent(Long studentId);
+
     Course updateCourseById(Long courseId, CourseDTO courseDTO);
 
     Course addStudentToCourse(Long courseId, Long studentId);
